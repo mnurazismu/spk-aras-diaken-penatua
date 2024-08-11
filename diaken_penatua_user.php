@@ -1,7 +1,6 @@
 <?php
 session_start();
 require 'env.php';
-
 if (!isset($_SESSION['login'])) {
     echo '
     <script src="src/jquery-3.6.3.min.js"></script>
@@ -77,6 +76,7 @@ if (!isset($_SESSION['login'])) {
         }
     }
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -88,7 +88,7 @@ if (!isset($_SESSION['login'])) {
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="src/output.css">
-    <title>Data Alternatif | SPK Aras</title>
+    <title>Data Diaken Penatua | SPK Aras</title>
 </head>
 
 <body class="font-['Inter']">
@@ -105,7 +105,7 @@ if (!isset($_SESSION['login'])) {
             <div class="flex justify-between items-center">
                 <p class="text-gray-400 text-base dark:text-gray-400"><?php echo date('d F Y'); ?></p>
                 <div>
-                    <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">Data Alternatif</h1>
+                    <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">Data Diaken Penatua</h1>
                 </div>
                 <div class="p-4 text-sm rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
                     <p class="font-medium"><span class="text-rose-800"><?= $nama_lengkap; ?></span></p>
@@ -122,12 +122,12 @@ if (!isset($_SESSION['login'])) {
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                                 </svg>
                             </div>
-                            <input type="search" id="default-search" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Search" required onkeyup="search()" />
+                            <input type="search" id="default-search" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500" placeholder="Search" autocomplete="off" required onkeyup="search()" />
                             <button type="submit" class="text-white absolute end-2.5 bottom-2.5 bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Search</button>
                         </div>
                     </form>
                     <div class="flex justify-end">
-                        <a href="tambah_alternatif_user.php"><button type="button" class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center flex items-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                        <a href="tambah_diaken_penatua_user.php"><button type="button" class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center flex items-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 mr-1" aria-hidden="true">
                                     <path fill-rule="evenodd" d="M12 3.75a.75.75 0 0 1 .75.75v6.75h6.75a.75.75 0 0 1 0 1.5h-6.75v6.75a.75.75 0 0 1-1.5 0v-6.75H4.5a.75.75 0 0 1 0-1.5h6.75V4.5a.75.75 0 0 1 .75-.75Z" clip-rule="evenodd" />
                                 </svg>
@@ -135,6 +135,7 @@ if (!isset($_SESSION['login'])) {
                             </button></a>
                     </div>
                 </div>
+
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                     <table class="w-full text-sm text-center rtl:text-right text-gray-500 dark:text-gray-400">
                         <thead class="text-sm text-white uppercase bg-quinary dark:bg-gray-700 dark:text-gray-400">
@@ -143,13 +144,17 @@ if (!isset($_SESSION['login'])) {
                                     No
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Nama Alternatif
+                                    Nama Lengkap
                                 </th>
-                                <?php foreach ($kriteria as $key => $value) : ?>
-                                    <th scope="col" class="px-6 py-3">
-                                        C<?= $key + 1 ?>
-                                    </th>
-                                <?php endforeach; ?>
+                                <th scope="col" class="px-6 py-3">
+                                    Tempat Lahir
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Tanggal Lahir
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Pendidikan Terakhir
+                                </th>
                                 <th scope="col" class="px-6 py-3">
                                     Aksi
                                 </th>
@@ -161,34 +166,29 @@ if (!isset($_SESSION['login'])) {
                                     <th class="px-6 py-4 border-r border-quinary">
                                         <?= $key + 1 ?>
                                     </th>
-                                    <?php
-                                    $id_alternatif = $value['id_alternatif'];
-                                    $query_matriks = "SELECT * FROM nilai_matriks WHERE id_alternatif = '$id_alternatif'";
-                                    $result_matriks = mysqli_query($conn, $query_matriks);
-                                    $nilai_matriks = [];
-                                    while ($row = mysqli_fetch_assoc($result_matriks)) {
-                                        $nilai_matriks[] = $row;
-                                    }
-                                    ?>
                                     <td class="px-6 py-4 border-r border-quinary">
                                         <?= $value['nama_alternatif'] ?>
                                     </td>
-                                    <?php foreach ($nilai_matriks as $key => $value) : ?>
-                                        <td class="px-6 py-4 border-r border-quinary">
-                                            <?= $value['nilai_matriks'] ?>
-                                        </td>
-                                    <?php endforeach; ?>
+                                    <td class="px-6 py-4 border-r border-quinary">
+                                        <?= $value['tempat_lahir'] ?>
+                                    </td>
+                                    <td class="px-6 py-4 border-r border-quinary">
+                                        <?= $value['tanggal_lahir'] ?>
+                                    </td>
+                                    <td class="px-6 py-4 border-r border-quinary">
+                                        <?= $value['pendidikan_terakhir'] ?>
+                                    </td>
                                     <td class="px-6 py-4">
-                                        <a href="./ubah_alternatif_user.php?id_alternatif=<?= $value['id_alternatif'] ?>"><button type="button" class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm p-2 text-center inline-flex items-center me-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                                        <a href="./ubah_diaken_penatua_user.php?id=<?= $value['id_alternatif'] ?>"><button type="button" class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm p-2 text-center inline-flex gap-1 items-center me-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
                                                     <path d="M21.731 2.269a2.625 2.625 0 0 0-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 0 0 0-3.712ZM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 0 0-1.32 2.214l-.8 2.685a.75.75 0 0 0 .933.933l2.685-.8a5.25 5.25 0 0 0 2.214-1.32l8.4-8.4Z" />
                                                     <path d="M5.25 5.25a3 3 0 0 0-3 3v10.5a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3V13.5a.75.75 0 0 0-1.5 0v5.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5V8.25a1.5 1.5 0 0 1 1.5-1.5h5.25a.75.75 0 0 0 0-1.5H5.25Z" />
-                                                </svg>
+                                                </svg> Edit
                                             </button></a>
-                                        <a href="javascript:void(0)" onclick="showConfirmationModalDelete()"><button type="button" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-2 text-center inline-flex items-center me-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                                        <a href="javascript:void(0)" onclick="showConfirmationModalDelete()"><button type="button" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-2 text-center inline-flex gap-1 items-center me-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
                                                     <path fill-rule="evenodd" d="M16.5 4.478v.227a48.816 48.816 0 0 1 3.878.512.75.75 0 1 1-.256 1.478l-.209-.035-1.005 13.07a3 3 0 0 1-2.991 2.77H8.084a3 3 0 0 1-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 0 1-.256-1.478A48.567 48.567 0 0 1 7.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 0 1 3.369 0c1.603.051 2.815 1.387 2.815 2.951Zm-6.136-1.452a51.196 51.196 0 0 1 3.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 0 0-6 0v-.113c0-.794.609-1.428 1.364-1.452Zm-.355 5.945a.75.75 0 1 0-1.5.058l.347 9a.75.75 0 1 0 1.499-.058l-.346-9Zm5.48.058a.75.75 0 1 0-1.498-.058l-.347 9a.75.75 0 0 0 1.5.058l.345-9Z" clip-rule="evenodd" />
-                                                </svg>
+                                                </svg> Delete
                                             </button></a>
                                     </td>
                                 </tr>
@@ -289,6 +289,7 @@ if (!isset($_SESSION['login'])) {
                 document.getElementById("confirmationModalDelete").style.display = "none";
             }
         }
+
         // JavaScript function to handle confirmation dialog
         function showConfirmationModalLogout() {
             document.getElementById("confirmationModalLogout").style.display = "flex";

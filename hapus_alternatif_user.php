@@ -26,7 +26,7 @@ if (!isset($_SESSION['login'])) {
     ';
     exit;
 } else {
-    if ($_SESSION['tipe_user'] != 'Admin') {
+    if ($_SESSION['tipe_user'] != 'User') {
         echo '
         <script src="src/jquery-3.6.3.min.js"></script>
         <script src="src/sweetalert2.all.min.js"></script>
@@ -35,14 +35,14 @@ if (!isset($_SESSION['login'])) {
             Swal.fire({
                 position: "top-center",
                 icon: "error",
-                title: "Anda Login Sebagai User!",
+                title: "Anda Login Sebagai Admin!",
                 showConfirmButton: false,
                 timer: 2000
             })
             setTimeout(myFunction, 2000);
         });
         function myFunction() {
-            document.location.href = "beranda_user.php";
+            document.location.href = "beranda_admin.php";
         }
         </script>
         ';
@@ -57,8 +57,8 @@ if (!isset($_SESSION['login'])) {
         $id = $_GET['id'];
         $query_matriks = "DELETE FROM nilai_matriks WHERE id_alternatif = '$id'";
         $result = mysqli_query($conn, $query_matriks);
-        // $query_hasil = "DELETE FROM hasil WHERE id_alternatif = '$id'";
-        // $result_hasil = mysqli_query($conn, $query_hasil);
+        $query_hasil = "DELETE FROM hasil WHERE id_alternatif = '$id'";
+        $result_hasil = mysqli_query($conn, $query_hasil);
         $query_alternatif = "DELETE FROM alternatif WHERE id_alternatif = '$id'";
         $result_alternatif = mysqli_query($conn, $query_alternatif);
         if ($result_alternatif) {
@@ -77,7 +77,7 @@ if (!isset($_SESSION['login'])) {
                 setTimeout(myFunction, 2000);
             });
             function myFunction() {
-                document.location.href = "alternatif_admin.php";
+                document.location.href = "alternatif_user.php";
             }
             </script>
             ';
@@ -97,7 +97,7 @@ if (!isset($_SESSION['login'])) {
                 setTimeout(myFunction, 2000);
             });
             function myFunction() {
-                document.location.href = "alternatif_admin.php";
+                document.location.href = "alternatif_user.php";
             }
             </script>
             ';

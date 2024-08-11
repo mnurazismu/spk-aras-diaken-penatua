@@ -35,7 +35,7 @@ if (!isset($_SESSION['login'])) {
             Swal.fire({
                 position: "top-center",
                 icon: "error",
-                title: "Anda Login Sebagai Guru!",
+                title: "Anda Login Sebagai User!",
                 showConfirmButton: false,
                 timer: 2000
             })

@@ -187,6 +187,9 @@ if (isset($_POST['masuk'])) {
         </section>
         <section class="lg:w-1/2 flex flex-col items-center justify-center bg-gradient-to-b from-primary to-secondary">
             <div class="w-full max-w-sm p-4 bg-gray-50 border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
+                <div class="flex justify-center mb-5">
+                    <img src="src/img/LOGO_GPIB.jpg" class="h-40" alt="Flowbite Logo" />
+                </div>
                 <form class="space-y-6" action="" method="post">
                     <h5 class="text-xl text-center font-medium bg-clip-text text-transparent bg-gradient-to-r from-tertiary to-quinary dark:text-white">Silahkan Login</h5>
                     <div class="mb-5">

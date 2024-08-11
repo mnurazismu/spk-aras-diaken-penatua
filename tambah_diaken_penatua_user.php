@@ -25,7 +25,7 @@ if (!isset($_SESSION['login'])) {
     ';
     exit;
 } else {
-    if ($_SESSION['tipe_user'] != 'Admin') {
+    if ($_SESSION['tipe_user'] != 'User') {
         echo '
         <script src="src/jquery-3.6.3.min.js"></script>
         <script src="src/sweetalert2.all.min.js"></script>
@@ -34,14 +34,14 @@ if (!isset($_SESSION['login'])) {
             Swal.fire({
                 position: "top-center",
                 icon: "error",
-                title: "Anda Login Sebagai User!",
+                title: "Anda Login Sebagai Admin!",
                 showConfirmButton: false,
                 timer: 2000
             })
             setTimeout(myFunction, 2000);
         });
         function myFunction() {
-            document.location.href = "beranda_user.php";
+            document.location.href = "beranda_admin.php";
         }
         </script>
         ';
@@ -90,7 +90,7 @@ if (!isset($_SESSION['login'])) {
                 setTimeout(myFunction, 2000);
             });
             function myFunction() {
-                document.location.href = "diaken_penatua_admin.php";
+                document.location.href = "diaken_penatua_user.php";
             }
             </script>
             ';
@@ -110,7 +110,7 @@ if (!isset($_SESSION['login'])) {
                 setTimeout(myFunction, 2000);
             });
             function myFunction() {
-                document.location.href = "tambah_diaken_penatua_admin.php";
+                document.location.href = "tambah_diaken_penatua_user.php";
             }
             </script>
             ';
@@ -175,7 +175,7 @@ if (!isset($_SESSION['login'])) {
             </div>
             <div>
                 <button type="submit" name="tambah" class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Tambah</button>
-                <a href="./diaken_penatua_admin.php"><button type="button" class="text-black bg-primary hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">Kembali</button></a>
+                <a href="./diaken_penatua_user.php"><button type="button" class="text-black bg-primary hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">Kembali</button></a>
             </div>
         </form>
     </div>

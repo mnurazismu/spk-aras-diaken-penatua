@@ -147,7 +147,7 @@ if (!isset($_SESSION['login'])) {
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="src/output.css">
-    <title>Tambah Alternatif</title>
+    <title>Ubah Diaken Penatua</title>
 </head>
 
 <body class="font-['Inter'] bg-gradient-to-br from-primary via-secondary to-quinary flex min-h-screen justify-center items-center">

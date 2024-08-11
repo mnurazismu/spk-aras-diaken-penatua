@@ -9,7 +9,7 @@
                     </svg>
                 </button>
                 <a href="#" class="flex ms-2 md:me-24">
-                    <img src="https://flowbite.com/docs/images/logo.svg" class="h-10" alt="Flowbite Logo" />
+                    <img src="src/img/logo_kecil.png" class="h-10" alt="Flowbite Logo" />
                 </a>
             </div>
             <div class="flex items-center">
@@ -23,7 +23,7 @@
                                 <a href="profil.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Profil</a>
                             </li>
                             <li>
-                                <a href="logout_guru.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Keluar</a>
+                                <a href="logout_admin.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Keluar</a>
                             </li>
                         </ul>
                     </div>

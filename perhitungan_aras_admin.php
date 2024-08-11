@@ -34,14 +34,14 @@ if (!isset($_SESSION['login'])) {
             Swal.fire({
                 position: "top-center",
                 icon: "error",
-                title: "Anda Login Sebagai Guru!",
+                title: "Anda Login Sebagai User!",
                 showConfirmButton: false,
                 timer: 2000
             })
             setTimeout(myFunction, 2000);
         });
         function myFunction() {
-            document.location.href = "beranda_guru.php";
+            document.location.href = "beranda_user.php";
         }
         </script>
         ';
@@ -142,9 +142,9 @@ if (!isset($_SESSION['login'])) {
 
     // Find the best value for each criteria; if criteria is cost, find the minimum value, otherwise find the maximum value
     $nilai_terbaik = [];
-    foreach ($kriteria as $key => $criteria) { 
+    foreach ($kriteria as $key => $criteria) {
         $nilai = [];
-        foreach ($nilai_matriks as $kunci => $matriks) { 
+        foreach ($nilai_matriks as $kunci => $matriks) {
             // Check if criteria ID matches
             if ($criteria['id_kriteria'] == $matriks['id_kriteria']) {
                 $nilai[] = $matriks['nilai_matriks'];
@@ -153,9 +153,9 @@ if (!isset($_SESSION['login'])) {
 
         // Determine the best value based on the criteria type
         if ($criteria['jenis_kriteria'] == 'Cost') {
-            $nilai_terbaik[] = !empty($nilai) ? min($nilai) : null; 
+            $nilai_terbaik[] = !empty($nilai) ? min($nilai) : null;
         } else {
-            $nilai_terbaik[] = !empty($nilai) ? max($nilai) : null; 
+            $nilai_terbaik[] = !empty($nilai) ? max($nilai) : null;
         }
     }
 
@@ -200,7 +200,7 @@ if (!isset($_SESSION['login'])) {
 
         // Store the divisor
         $pembagi_per_kriteria[$criteria['id_kriteria']] = $pembagi;
-        
+
         // Normalize the best value
         if ($criteria['jenis_kriteria'] == 'Cost') {
             $nilai_terbaik_normalisasi[] = [
@@ -269,7 +269,7 @@ if (!isset($_SESSION['login'])) {
     // echo "<pre>";
     // print_r($nilai_normalisasi);
     // echo "</pre>";
-    
+
     // Calculate the weighted normalized matrix
     $nilai_normalisasi_terbobot = [];
     foreach ($nilai_normalisasi as $key => $value) {
@@ -329,7 +329,7 @@ if (!isset($_SESSION['login'])) {
     foreach ($nilai_normalisasi_terbobot_sum as $key => $value) {
         $total_max_value = array_sum($max_value_per_kriteria); // Sum of all max values for criteria
         $nilai_utilitas_value = $total_max_value > 0 ? $value['nilai_normalisasi_terbobot_sum'] / $total_max_value : 0; // Avoid division by zero
-        
+
         $nilai_utilitas[] = [
             'id_alternatif' => $value['id_alternatif'],
             'nama_alternatif' => $value['nama_alternatif'],
@@ -543,7 +543,7 @@ if (!isset($_SESSION['login'])) {
                 <thead class="text-sm text-white uppercase bg-quinary dark:bg-gray-700 dark:text-gray-400">
                     <tr class="">
                         <th class=""></th>
-                        <th scope="col" colspan="<?= $jumlah_kriteria + 1?>" class="px-6 py-3 text-center">
+                        <th scope="col" colspan="<?= $jumlah_kriteria + 1 ?>" class="px-6 py-3 text-center">
                             Kriteria
                         </th>
                     </tr>
@@ -569,7 +569,7 @@ if (!isset($_SESSION['login'])) {
                                     <?= $nilai['nilai_normalisasi_terbobot'] ?>
                                 </td>
                             <?php endforeach; ?>
-                            
+
                         </tr>
                     <?php endforeach; ?>
                     <!-- tampilkan bobot kriteria yang sudah dibagi 100 -->
@@ -594,7 +594,7 @@ if (!isset($_SESSION['login'])) {
                 <thead class="text-sm text-white uppercase bg-quinary dark:bg-gray-700 dark:text-gray-400">
                     <tr class="">
                         <th class=""></th>
-                        <th scope="col" colspan="<?= $jumlah_kriteria + 1?>" class="px-6 py-3 text-center">
+                        <th scope="col" colspan="<?= $jumlah_kriteria + 1 ?>" class="px-6 py-3 text-center">
                             Kriteria
                         </th>
                     </tr>
@@ -637,7 +637,7 @@ if (!isset($_SESSION['login'])) {
                 <thead class="text-sm text-white uppercase bg-quinary dark:bg-gray-700 dark:text-gray-400">
                     <tr class="">
                         <th class=""></th>
-                        <th scope="col" colspan="<?= $jumlah_kriteria + 2?>" class="px-6 py-3 text-center">
+                        <th scope="col" colspan="<?= $jumlah_kriteria + 2 ?>" class="px-6 py-3 text-center">
                             Kriteria
                         </th>
                     </tr>
@@ -678,7 +678,7 @@ if (!isset($_SESSION['login'])) {
         </div>
         <!-- tombol kembali -->
         <a href="./perhitungan_admin.php"><button type="button" class="text-white mx-4 mt-4 w-full bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">Kembali</button></a>
-        
+
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 </body>

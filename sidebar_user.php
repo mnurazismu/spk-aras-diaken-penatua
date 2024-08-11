@@ -10,6 +10,14 @@
             </a>
         </li>
         <li>
+            <a href="diaken_penatua_user.php" class="flex items-center p-2 text-gray-900 rounded-lg <?php echo (basename($_SERVER['PHP_SELF']) == 'diaken_penatua_user.php') ? 'bg-primary text-rose-800' : '' ?> dark:text-white hover:bg-primary dark:hover:bg-gray-700 group">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 <?php echo (basename($_SERVER['PHP_SELF']) == 'diaken_penatua_user.php') ? 'text-rose-800' : '' ?> group-hover:text-rose-800 dark:group-hover:text-white">
+                    <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z" clip-rule="evenodd" />
+                </svg>
+                <span class="flex-1 ms-3 whitespace-nowrap">Diaken Penatua</span>
+            </a>
+        </li>
+        <li>
             <a href="alternatif_user.php" class="flex items-center p-2 text-gray-900 rounded-lg <?php echo (basename($_SERVER['PHP_SELF']) == 'alternatif_user.php') ? 'bg-primary text-rose-800' : '' ?> dark:text-white hover:bg-primary dark:hover:bg-gray-700 group">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 <?php echo (basename($_SERVER['PHP_SELF']) == 'alternatif_user.php') ? 'text-rose-800' : '' ?> group-hover:text-rose-800 dark:group-hover:text-white">
                     <path d="M21 6.375c0 2.692-4.03 4.875-9 4.875S3 9.067 3 6.375 7.03 1.5 12 1.5s9 2.183 9 4.875Z" />

@@ -18,7 +18,7 @@ if (!isset($_SESSION['login'])) {
         setTimeout(myFunction, 2000);
     });
     function myFunction() {
-        document.location.href = "login.php";
+        document.location.href = "index.php";
     }
     </script>
     ';

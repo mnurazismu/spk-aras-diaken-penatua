@@ -25,7 +25,7 @@ if (!isset($_SESSION['login'])) {
     ';
     exit;
 } else {
-    if ($_SESSION['tipe_user'] != 'Admin') {
+    if ($_SESSION['tipe_user'] != 'User') {
         echo '
         <script src="src/jquery-3.6.3.min.js"></script>
         <script src="src/sweetalert2.all.min.js"></script>
@@ -34,14 +34,14 @@ if (!isset($_SESSION['login'])) {
             Swal.fire({
                 position: "top-center",
                 icon: "error",
-                title: "Anda Login Sebagai User!",
+                title: "Anda Login Sebagai Admin!",
                 showConfirmButton: false,
                 timer: 2000
             })
             setTimeout(myFunction, 2000);
         });
         function myFunction() {
-            document.location.href = "beranda_user.php";
+            document.location.href = "beranda_admin.php";
         }
         </script>
         ';
@@ -52,69 +52,18 @@ if (!isset($_SESSION['login'])) {
     $nama_lengkap = $_SESSION['nama_lengkap'];
     $tipe_user = $_SESSION['tipe_user'];
 
-    if (isset($_POST['tambah'])) {
+    if (isset($_POST['selanjutnya'])) {
         $nama_alternatif = $_POST['nama_alternatif'];
         $tempat_lahir = $_POST['tempat_lahir'];
         $tanggal_lahir = $_POST['tanggal_lahir'];
         $pendidikan_terakhir = $_POST['pendidikan_terakhir'];
 
-        $formatted_date = date('Y-m-d', strtotime($tanggal_lahir));
-        $query = "INSERT INTO alternatif (nama_alternatif, tempat_lahir, tanggal_lahir, pendidikan_terakhir) VALUES ('$nama_alternatif', '$tempat_lahir', '$formatted_date', '$pendidikan_terakhir')";
-        $result = mysqli_query($conn, $query);
-        $query2 = "SELECT MAX(id_alternatif) as id_alternatif FROM alternatif";
-        $result2 = mysqli_query($conn, $query2);
-        $row = mysqli_fetch_assoc($result2);
-        $id_alternatif = $row['id_alternatif'];
-
-        // tambah default nilai_matriks yaitu 0 untuk setiap kriteria jika ada diaken penatua baru
-        $query_kriteria = "SELECT * FROM kriteria";
-        $result_kriteria = mysqli_query($conn, $query_kriteria);
-        while ($row_kriteria = mysqli_fetch_assoc($result_kriteria)) {
-            $id_kriteria = $row_kriteria['id_kriteria'];
-            $query_nilai_matriks = "INSERT INTO nilai_matriks (id_alternatif, id_kriteria, nilai_matriks) VALUES ('$id_alternatif', '$id_kriteria', 0)";
-            $result_nilai_matriks = mysqli_query($conn, $query_nilai_matriks);
-        }
-        if ($result) {
-            echo '
-            <script src="src/jquery-3.6.3.min.js"></script>
-            <script src="src/sweetalert2.all.min.js"></script>
-            <script>
-            $(document).ready(function() {
-                Swal.fire({
-                    position: "top-center",
-                    icon: "success",
-                    title: "Data Berhasil Ditambahkan!",
-                    showConfirmButton: false,
-                    timer: 2000
-                })
-                setTimeout(myFunction, 2000);
-            });
-            function myFunction() {
-                document.location.href = "diaken_penatua_admin.php";
-            }
-            </script>
-            ';
-        } else {
-            echo '
-            <script src="src/jquery-3.6.3.min.js"></script>
-            <script src="src/sweetalert2.all.min.js"></script>
-            <script>
-            $(document).ready(function() {
-                Swal.fire({
-                    position: "top-center",
-                    icon: "error",
-                    title: "Data Gagal Ditambahkan!",
-                    showConfirmButton: false,
-                    timer: 2000
-                })
-                setTimeout(myFunction, 2000);
-            });
-            function myFunction() {
-                document.location.href = "tambah_diaken_penatua_admin.php";
-            }
-            </script>
-            ';
-        }
+        $_SESSION['nama_alternatif'] = $nama_alternatif;
+        $_SESSION['tempat_lahir'] = $tempat_lahir;
+        $_SESSION['tanggal_lahir'] = $tanggal_lahir;
+        $_SESSION['pendidikan_terakhir'] = $pendidikan_terakhir;
+        header('Location: tambah_alternatif_user_2.php');
+        exit;
     }
 }
 ?>
@@ -128,16 +77,16 @@ if (!isset($_SESSION['login'])) {
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="src/output.css">
-    <title>Tambah Diaken Penatua</title>
+    <title>Tambah Alternatif</title>
 </head>
 
 <body class="font-['Inter'] bg-gradient-to-br from-primary via-secondary to-quinary flex min-h-screen justify-center items-center">
     <div class="w-1/2 shadow-md bg-gray-100 rounded-md py-12">
         <form class="max-w-2xl mx-auto lg:min-w-96" action="" method="post">
-            <h1 class="text-2xl text-center font-extrabold tracking-tight leading-none text-quinary dark:text-white">Tambah Diaken Penatua</h1>
+            <h1 class="text-2xl text-center font-extrabold tracking-tight leading-none text-quinary dark:text-white">Tambah Alternatif</h1>
             <hr>
             <hr>
-            <h3 class="mb-8 mt-2 text-sm">Silahkan lengkapi form berikut ini untuk melanjutkan tambah diaken penatua.</h3>
+            <h3 class="mb-8 mt-2 text-sm">Silahkan lengkapi form berikut ini untuk melanjutkan tambah alternatif.</h3>
             <div class="mb-5">
                 <label for="nama_alternatif" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Lengkap</label>
                 <div class="relative">
@@ -174,8 +123,8 @@ if (!isset($_SESSION['login'])) {
                 </div>
             </div>
             <div>
-                <button type="submit" name="tambah" class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Tambah</button>
-                <a href="./diaken_penatua_admin.php"><button type="button" class="text-black bg-primary hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">Kembali</button></a>
+                <button type="submit" name="selanjutnya" class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Selanjutnya</button>
+                <a href="./alternatif_user.php"><button type="button" class="text-black bg-primary hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">Kembali</button></a>
             </div>
         </form>
     </div>
